@@ -8,11 +8,9 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.Color;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -48,29 +46,6 @@ public class ViewChannel extends JFrame {
 	Connection con;
 	PreparedStatement pst;
 	ResultSet rs;
-
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager
-					.getConnection("jdbc:sqlite:sample.db");
-
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
 
 	public void channel_table() {
 
@@ -110,7 +85,7 @@ public class ViewChannel extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pst.close();
@@ -151,7 +126,7 @@ public class ViewChannel extends JFrame {
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "Rendez-vous N°", "Docteur", "Patient", "Chambre N°", "Date" }));
+				new String[] { "Rendez-vous Nï¿½", "Docteur", "Patient", "Chambre Nï¿½", "Date" }));
 		table.setBounds(84, 73, 512, 270);
 		sp.setViewportView(table);
 
@@ -183,7 +158,7 @@ public class ViewChannel extends JFrame {
 
 		newid = 6;
 
-		Connect();
+		Connexion.Connect(con, pst, rs);
 		channel_table();
 	}
 
@@ -217,7 +192,7 @@ public class ViewChannel extends JFrame {
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "Rendez-vous N°", "Docteur", "Patient", "Chambre N°", "Date" }));
+				new String[] { "Rendez-vous Nï¿½", "Docteur", "Patient", "Chambre Nï¿½", "Date" }));
 		table.setBounds(84, 73, 512, 270);
 		sp.setViewportView(table);
 
@@ -250,7 +225,7 @@ public class ViewChannel extends JFrame {
 		this.id = id;
 		newid = id;
 
-		Connect();
+		Connexion.Connect(con, pst, rs);
 		channel_table();
 	}
 }

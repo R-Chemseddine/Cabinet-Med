@@ -6,9 +6,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
-import java.awt.Image;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,14 +14,10 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
-import java.awt.Toolkit;
 
 public class StartLogin extends JFrame {
 
@@ -50,29 +44,6 @@ public class StartLogin extends JFrame {
 	Connection con = null;
 	PreparedStatement pst;
 	ResultSet rs;
-
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:sample.db");
-			
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
 
 	/**
 	 * Create the frame.
@@ -135,9 +106,10 @@ public class StartLogin extends JFrame {
 				String password = txtpassword.getText();
 				String usertype = txtusertype.getSelectedItem().toString();
 
-				Connect();
+				Connexion.Connect(con, pst, rs);
 				try {
-					pst = con.prepareStatement("select * from 'user' where username = ? and password = ? and usertype = ?");
+					pst = con.prepareStatement(
+							"select * from 'user' where username = ? and password = ? and usertype = ?");
 
 					pst.setString(1, username);
 					pst.setString(2, password);
@@ -163,7 +135,7 @@ public class StartLogin extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -183,25 +155,22 @@ public class StartLogin extends JFrame {
 			}
 		});
 		panel.add(btnNewButton_1);
-		
+
 		JLabel lblNewLabel_4 = new JLabel("Login");
 		lblNewLabel_4.setForeground(Color.WHITE);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 23));
 		lblNewLabel_4.setBounds(280, 21, 77, 28);
 		panel.add(lblNewLabel_4);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("R.ChemsEddine");
 		lblNewLabel_5.setBounds(516, 371, 99, 16);
 		panel.add(lblNewLabel_5);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("");
 		ImageIcon img = new ImageIcon(this.getClass().getClassLoader().getResource("medical-5.png"));
 		lblNewLabel_3.setIcon(img);
 		lblNewLabel_3.setBounds(-11, 0, 626, 393);
 		panel.add(lblNewLabel_3);
-		
-		
-		
-		
+
 	}
 }

@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -23,8 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import jdk.nashorn.api.tree.TryTree;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -65,29 +62,6 @@ public class Doctor extends JFrame {
 	private JTextField txtdp;
 	private JSpinner txtroom;
 
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager
-					.getConnection("jdbc:sqlite:sample.db");
-
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
-
 	public void doctor_table() {
 
 		try {
@@ -127,7 +101,7 @@ public class Doctor extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pst.close();
@@ -149,8 +123,6 @@ public class Doctor extends JFrame {
 		setContentPane(contentPane);
 		setLocationRelativeTo(this);
 		contentPane.setLayout(null);
-
-		//Connect();
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(14, 46, 130));
@@ -245,7 +217,7 @@ public class Doctor extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -302,7 +274,7 @@ public class Doctor extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -347,7 +319,7 @@ public class Doctor extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -448,7 +420,7 @@ public class Doctor extends JFrame {
 		lblNewLabel_4.setFont(new Font("SansSerif", Font.BOLD, 32));
 		lblNewLabel_4.setBounds(298, 6, 291, 42);
 		panel.add(lblNewLabel_4);
-		Connect();
+		Connexion.Connect(con, pst, rs);
 		doctor_table();
 
 	}
@@ -468,8 +440,6 @@ public class Doctor extends JFrame {
 		setContentPane(contentPane);
 		setLocationRelativeTo(this);
 		contentPane.setLayout(null);
-
-		//Connect();
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(14, 46, 130));
@@ -565,7 +535,7 @@ public class Doctor extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -622,7 +592,7 @@ public class Doctor extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -666,7 +636,7 @@ public class Doctor extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -772,7 +742,6 @@ public class Doctor extends JFrame {
 		this.utype = utype;
 
 		newid = id;
-		//Connect();
 		doctor_table();
 	}
 }

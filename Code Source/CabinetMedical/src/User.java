@@ -1,12 +1,11 @@
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -46,28 +45,7 @@ public class User extends JFrame {
 
 	Connection con;
 	PreparedStatement pst;
-
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:sample.db");
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
+	ResultSet rs;
 
 	/**
 	 * Create the frame.
@@ -147,7 +125,7 @@ public class User extends JFrame {
 				String password = txtpassword.getText();
 				String usertype = txtusertype.getSelectedItem().toString();
 
-				Connect();
+				Connexion.Connect(con, pst, rs);
 				try {
 					pst = con.prepareStatement("insert into user(name,username,password,usertype)values(?,?,?,?)");
 					pst.setString(1, name);
@@ -169,9 +147,9 @@ public class User extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
-						
+
 						pst.close();
 					} catch (Exception e2) {
 						// TODO: handle exception
@@ -190,14 +168,14 @@ public class User extends JFrame {
 		});
 		btnNewButton_1.setBounds(149, 313, 89, 23);
 		panel.add(btnNewButton_1);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("New label");
-		//Image img = new ImageIcon(this.getClass().getResource("/medical-5.png")).getImage();
+		// Image img = new
+		// ImageIcon(this.getClass().getResource("/medical-5.png")).getImage();
 		ImageIcon img = new ImageIcon(this.getClass().getClassLoader().getResource("medical-5.png"));
 		lblNewLabel_5.setIcon(img);
 		lblNewLabel_5.setBounds(0, 0, 621, 399);
 		panel.add(lblNewLabel_5);
-		
-		
+
 	}
 }

@@ -7,7 +7,6 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -122,27 +121,25 @@ public class Main extends JFrame {
 		JButton btnlogout = new JButton("Logout");
 		btnlogout.setBounds(31, 346, 158, 23);
 		panel_1.add(btnlogout);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("Noname Cabinet");
 		lblNewLabel_5.setFont(new Font("SansSerif", Font.BOLD, 32));
 		lblNewLabel_5.setForeground(Color.WHITE);
 		lblNewLabel_5.setBounds(256, 11, 260, 66);
 		panel_1.add(lblNewLabel_5);
-		
+
 		JLabel lblNewLabel = new JLabel("R.ChemsEddine");
 		lblNewLabel.setBounds(621, 370, 92, 16);
 		panel_1.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_4 = new JLabel("");
-		//Image img = new ImageIcon(this.getClass().getResource("/medical-54596.png")).getImage();
+		// Image img = new
+		// ImageIcon(this.getClass().getResource("/medical-54596.png")).getImage();
 		ImageIcon img = new ImageIcon(this.getClass().getClassLoader().getResource("medical-54596.png"));
 		lblNewLabel_4.setIcon(img);
 		lblNewLabel_4.setBounds(0, 0, 727, 399);
 		panel_1.add(lblNewLabel_4);
-		
-		
-		
-		
+
 		btnlogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -288,25 +285,25 @@ public class Main extends JFrame {
 		JButton btnlogout = new JButton("Logout");
 		btnlogout.setBounds(31, 346, 158, 23);
 		panel_1.add(btnlogout);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("Noname Cabinet");
 		lblNewLabel_5.setFont(new Font("SansSerif", Font.BOLD, 32));
 		lblNewLabel_5.setForeground(Color.WHITE);
 		lblNewLabel_5.setBounds(256, 11, 260, 66);
 		panel_1.add(lblNewLabel_5);
-		
+
 		JLabel lblNewLabel = new JLabel("R.ChemsEddine");
 		lblNewLabel.setBounds(621, 370, 92, 16);
 		panel_1.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_4 = new JLabel("");
-		//Image img = new ImageIcon(this.getClass().getResource("/medical-54596.png")).getImage();
+		// Image img = new
+		// ImageIcon(this.getClass().getResource("/medical-54596.png")).getImage();
 		ImageIcon img = new ImageIcon(this.getClass().getClassLoader().getResource("medical-54596.png"));
 		lblNewLabel_4.setIcon(img);
 		lblNewLabel_4.setBounds(0, 0, 727, 399);
 		panel_1.add(lblNewLabel_4);
-		
-		
+
 		btnlogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);

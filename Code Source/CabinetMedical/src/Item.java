@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -61,28 +60,6 @@ public class Item extends JFrame {
 	PreparedStatement pst;
 	ResultSet rs;
 
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:sample.db");
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
-
 	public void item_table() {
 
 		try {
@@ -117,7 +94,7 @@ public class Item extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pst.close();
@@ -140,7 +117,7 @@ public class Item extends JFrame {
 		setLocationRelativeTo(this);
 		contentPane.setLayout(null);
 
-		Connect();
+		Connexion.Connect(con, pst, rs);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(14, 46, 130));
@@ -232,7 +209,7 @@ public class Item extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -286,7 +263,7 @@ public class Item extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -330,7 +307,7 @@ public class Item extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -377,7 +354,7 @@ public class Item extends JFrame {
 		});
 		btnNewButton_3.setBounds(113, 343, 89, 23);
 		panel.add(btnNewButton_3);
-		
+
 		JScrollPane sp = new JScrollPane();
 		sp.setBounds(323, 52, 555, 280);
 		panel.add(sp);
@@ -402,7 +379,8 @@ public class Item extends JFrame {
 
 		table.setModel(
 				new DefaultTableModel(new Object[][] {},
-						new String[] { "Item ID", "Item name", "Description", "Prix de vente", "Prix d'achat", "Quantité" }));
+						new String[] { "Item ID", "Item name", "Description", "Prix de vente", "Prix d'achat",
+								"Quantitï¿½" }));
 		table.setBounds(323, 52, 531, 280);
 		sp.setViewportView(table);
 		item_table();

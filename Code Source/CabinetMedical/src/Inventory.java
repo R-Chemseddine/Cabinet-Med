@@ -17,7 +17,6 @@ import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,7 +35,6 @@ public class Inventory extends JFrame {
 	private JTextField txtbalance;
 	private JTextField txtpaye;
 	private JTextField txttotal;
-	
 
 	/**
 	 * Launch the application.
@@ -123,28 +121,6 @@ public class Inventory extends JFrame {
 	PreparedStatement pst;
 	ResultSet rs;
 
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:sample.db");
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -208,7 +184,7 @@ public class Inventory extends JFrame {
 						rs = pst.executeQuery();
 
 						if (rs.next() == false) {
-							JOptionPane.showMessageDialog(null, "Medicament non trouvé", "gg",
+							JOptionPane.showMessageDialog(null, "Medicament non trouvï¿½", "gg",
 									JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							String name = rs.getString("itemname");
@@ -218,7 +194,7 @@ public class Inventory extends JFrame {
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}finally {
+					} finally {
 						try {
 							rs.close();
 							pst.close();
@@ -243,14 +219,14 @@ public class Inventory extends JFrame {
 		final JSpinner txtqnt = new JSpinner();
 		txtqnt.setBounds(164, 175, 43, 20);
 		panel.add(txtqnt);
-		
+
 		JScrollPane sp = new JScrollPane();
 		sp.setBounds(6, 240, 607, 184);
 		panel.add(sp);
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "Item ID", "Item name", "Description", "Prix de vente", "Quantité", "Prix d'achat" }));
+				new String[] { "Item ID", "Item name", "Description", "Prix de vente", "Quantitï¿½", "Prix d'achat" }));
 		table.setBounds(10, 196, 611, 178);
 		sp.setViewportView(table);
 
@@ -312,9 +288,9 @@ public class Inventory extends JFrame {
 						Integer Sellprice = new Integer(sellprice);
 
 						if (qnt >= currentqnt) {
-							JOptionPane.showMessageDialog(null, "Quantité disponible" + currentqnt, "grr",
+							JOptionPane.showMessageDialog(null, "Quantitï¿½ disponible" + currentqnt, "grr",
 									JOptionPane.INFORMATION_MESSAGE);
-							JOptionPane.showMessageDialog(null, "Quantité insuffisante", "grr",
+							JOptionPane.showMessageDialog(null, "Quantitï¿½ insuffisante", "grr",
 									JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							DefaultTableModel df = (DefaultTableModel) table.getModel();
@@ -341,7 +317,7 @@ public class Inventory extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -378,7 +354,7 @@ public class Inventory extends JFrame {
 		lblNewLabel.setBounds(221, 6, 168, 32);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
-		
+
 		JButton btnNewButton_2 = new JButton("Cancel");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -387,7 +363,7 @@ public class Inventory extends JFrame {
 		});
 		btnNewButton_2.setBounds(256, 430, 89, 23);
 		panel.add(btnNewButton_2);
-		Connect();
+		Connexion.Connect(con, pst, rs);
 	}
 
 	String pnoo;
@@ -438,7 +414,7 @@ public class Inventory extends JFrame {
 		labelpid.setFont(new Font("Tahoma", Font.BOLD, 14));
 		labelpid.setBounds(164, 56, 131, 14);
 		panel.add(labelpid);
-		
+
 		txtcode = new JTextField();
 		txtcode.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
@@ -454,7 +430,7 @@ public class Inventory extends JFrame {
 						rs = pst.executeQuery();
 
 						if (rs.next() == false) {
-							JOptionPane.showMessageDialog(null, "Medicament non trouvé", "gg",
+							JOptionPane.showMessageDialog(null, "Medicament non trouvï¿½", "gg",
 									JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							String name = rs.getString("itemname");
@@ -464,7 +440,7 @@ public class Inventory extends JFrame {
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}finally {
+					} finally {
 						try {
 							rs.close();
 							pst.close();
@@ -489,14 +465,14 @@ public class Inventory extends JFrame {
 		final JSpinner txtqnt = new JSpinner();
 		txtqnt.setBounds(164, 175, 43, 20);
 		panel.add(txtqnt);
-		
+
 		JScrollPane sp = new JScrollPane();
 		sp.setBounds(6, 240, 607, 184);
 		panel.add(sp);
 
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "Item ID", "Item name", "Description", "Prix de vente", "Quantité", "Prix d'achat" }));
+				new String[] { "Item ID", "Item name", "Description", "Prix de vente", "Quantitï¿½", "Prix d'achat" }));
 		table.setBounds(10, 196, 611, 178);
 		sp.setViewportView(table);
 
@@ -558,9 +534,9 @@ public class Inventory extends JFrame {
 						Integer Sellprice = new Integer(sellprice);
 
 						if (qnt >= currentqnt) {
-							JOptionPane.showMessageDialog(null, "Quantité disponible" + currentqnt, "grr",
+							JOptionPane.showMessageDialog(null, "Quantitï¿½ disponible" + currentqnt, "grr",
 									JOptionPane.INFORMATION_MESSAGE);
-							JOptionPane.showMessageDialog(null, "Quantité insuffisante", "grr",
+							JOptionPane.showMessageDialog(null, "Quantitï¿½ insuffisante", "grr",
 									JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							DefaultTableModel df = (DefaultTableModel) table.getModel();
@@ -587,7 +563,7 @@ public class Inventory extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -618,14 +594,13 @@ public class Inventory extends JFrame {
 		});
 		btnNewButton_1.setBounds(330, 206, 103, 23);
 		panel.add(btnNewButton_1);
-		
-		
+
 		JLabel lblNewLabel = new JLabel("Inventaire");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(221, 6, 168, 32);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
-		
+
 		JButton btnNewButton_2 = new JButton("Cancel");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -634,7 +609,7 @@ public class Inventory extends JFrame {
 		});
 		btnNewButton_2.setBounds(256, 430, 89, 23);
 		panel.add(btnNewButton_2);
-		Connect();
+		Connexion.Connect(con, pst, rs);
 		this.pnoo = pno;
 
 		newpno = pnoo;

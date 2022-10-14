@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,28 +50,6 @@ public class Prescription extends JFrame {
 	PreparedStatement pst;
 	ResultSet rs;
 
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:sample.db");
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -86,7 +63,9 @@ public class Prescription extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Prescription", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
+		panel.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Prescription", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
 		panel.setBackground(new Color(14, 46, 130));
 		panel.setBounds(0, 0, 496, 247);
 		contentPane.add(panel);
@@ -136,9 +115,9 @@ public class Prescription extends JFrame {
 		labelno.setBounds(190, 36, 78, 14);
 		panel.add(labelno);
 
-		Connect();
+		Connexion.Connect(con, pst, rs);
 
-		JButton btnNewButton = new JButton("Créer");
+		JButton btnNewButton = new JButton("Crï¿½er");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -174,7 +153,7 @@ public class Prescription extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -186,7 +165,7 @@ public class Prescription extends JFrame {
 		});
 		btnNewButton.setBounds(135, 198, 89, 23);
 		panel.add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("Cancel");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -214,7 +193,9 @@ public class Prescription extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Prescription", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
+		panel.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Prescription", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
 		panel.setBackground(new Color(14, 46, 130));
 		panel.setBounds(0, 0, 496, 247);
 		contentPane.add(panel);
@@ -264,9 +245,9 @@ public class Prescription extends JFrame {
 		labelno.setBounds(190, 36, 78, 14);
 		panel.add(labelno);
 
-		Connect();
+		Connexion.Connect(con, pst, rs);
 
-		JButton btnNewButton = new JButton("Créer");
+		JButton btnNewButton = new JButton("Crï¿½er");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -302,7 +283,7 @@ public class Prescription extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -314,7 +295,7 @@ public class Prescription extends JFrame {
 		});
 		btnNewButton.setBounds(135, 198, 89, 23);
 		panel.add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("Cancel");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

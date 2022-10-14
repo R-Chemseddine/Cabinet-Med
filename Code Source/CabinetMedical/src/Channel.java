@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -57,28 +56,6 @@ public class Channel extends JFrame {
 	ResultSet rs;
 	String chno;
 
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:sample.db");
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
-
 	public class Doctor {
 		String id;
 		String name;
@@ -108,7 +85,7 @@ public class Channel extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pst.close();
@@ -147,7 +124,7 @@ public class Channel extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pst.close();
@@ -192,7 +169,7 @@ public class Channel extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pst.close();
@@ -223,7 +200,8 @@ public class Channel extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(
-				new TitledBorder(null, "Reservation", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
+				new TitledBorder(null, "Reservation", TitledBorder.LEADING, TitledBorder.TOP, null,
+						new Color(59, 59, 59)));
 		panel_1.setBounds(6, 61, 280, 233);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
@@ -298,7 +276,7 @@ public class Channel extends JFrame {
 
 					pst.executeUpdate();
 
-					JOptionPane.showMessageDialog(null, "Rendez-vous Crée !", "grr", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Rendez-vous Crï¿½e !", "grr", JOptionPane.INFORMATION_MESSAGE);
 
 					txtdoctorname.setSelectedIndex(-1);
 					txtpatientname.setSelectedIndex(-1);
@@ -313,7 +291,7 @@ public class Channel extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -353,7 +331,7 @@ public class Channel extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -365,7 +343,7 @@ public class Channel extends JFrame {
 		});
 		btnCancel.setBounds(147, 188, 90, 28);
 		panel_1.add(btnCancel);
-		
+
 		JScrollPane sp = new JScrollPane();
 		sp.setBounds(296, 61, 416, 233);
 		panel.add(sp);
@@ -394,14 +372,13 @@ public class Channel extends JFrame {
 		});
 		table.setBounds(296, 66, 392, 270);
 		sp.setViewportView(table);
-		
 
 		JLabel lblNewLabel_6 = new JLabel("Rendez-vous");
 		lblNewLabel_6.setForeground(Color.WHITE);
 		lblNewLabel_6.setFont(new Font("SansSerif", Font.PLAIN, 32));
 		lblNewLabel_6.setBounds(255, 6, 193, 48);
 		panel.add(lblNewLabel_6);
-		
+
 		JButton btnNewButton_1 = new JButton("Cancel");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -411,7 +388,7 @@ public class Channel extends JFrame {
 		btnNewButton_1.setBounds(306, 306, 90, 28);
 		panel.add(btnNewButton_1);
 
-		Connect();
+		Connexion.Connect(con, pst, rs);
 		LoadDoctor();
 		LoadPatient();
 		channel_table();

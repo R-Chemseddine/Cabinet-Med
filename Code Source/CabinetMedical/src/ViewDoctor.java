@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -45,29 +44,6 @@ public class ViewDoctor extends JFrame {
 	Connection con;
 	PreparedStatement pst;
 	ResultSet rs;
-
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager
-					.getConnection("jdbc:sqlite:sample.db");
-
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
 
 	public void Doctor_table() {
 
@@ -105,7 +81,7 @@ public class ViewDoctor extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pst.close();
@@ -134,34 +110,34 @@ public class ViewDoctor extends JFrame {
 		panel.setBounds(0, 0, 609, 438);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JScrollPane sp = new JScrollPane();
 		sp.setBounds(6, 58, 597, 339);
 		panel.add(sp);
-		
+
 		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Doctor N°", "Nom", "Spécialité",
-				"Qualification", "Rendez-vous", "N° telephone", "Chambre N°" }));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Doctor Nï¿½", "Nom", "Spï¿½cialitï¿½",
+				"Qualification", "Rendez-vous", "Nï¿½ telephone", "Chambre Nï¿½" }));
 		table.getTableHeader();
 		table.setBounds(10, 11, 569, 320);
 		sp.setViewportView(table);
-		
-				JButton btnNewButton = new JButton("Close");
-				btnNewButton.setBounds(254, 409, 89, 23);
-				panel.add(btnNewButton);
-				
-						JLabel lblNewLabel = new JLabel("Doctors List");
-						lblNewLabel.setForeground(Color.WHITE);
-						lblNewLabel.setBounds(206, 14, 202, 32);
-						panel.add(lblNewLabel);
-						lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
-				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						setVisible(false);
-					}
-				});
 
-		Connect();
+		JButton btnNewButton = new JButton("Close");
+		btnNewButton.setBounds(254, 409, 89, 23);
+		panel.add(btnNewButton);
+
+		JLabel lblNewLabel = new JLabel("Doctors List");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(206, 14, 202, 32);
+		panel.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+
+		Connexion.Connect(con, pst, rs);
 		Doctor_table();
 	}
 

@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -58,29 +57,6 @@ public class Patient extends JFrame {
 
 	int ln = 7;
 
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager
-					.getConnection("jdbc:sqlite:sample.db");
-
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
-
 	public void patient_table() {
 
 		try {
@@ -113,7 +89,7 @@ public class Patient extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pst.close();
@@ -136,7 +112,7 @@ public class Patient extends JFrame {
 		setLocationRelativeTo(this);
 		contentPane.setLayout(null);
 
-		Connect();
+		Connexion.Connect(con, pst, rs);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(14, 46, 130));
@@ -224,7 +200,7 @@ public class Patient extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -263,7 +239,7 @@ public class Patient extends JFrame {
 					txtadress.setText("");
 					txtpname.requestFocus();
 					btnNewButton_2.setEnabled(true);
-					
+
 					ln++;
 					labelnumber.setText(ln + "");
 
@@ -272,7 +248,7 @@ public class Patient extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();
@@ -313,7 +289,7 @@ public class Patient extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}finally {
+				} finally {
 					try {
 						rs.close();
 						pst.close();

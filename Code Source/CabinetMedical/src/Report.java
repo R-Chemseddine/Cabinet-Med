@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -41,33 +40,11 @@ public class Report extends JFrame {
 			}
 		});
 	}
-	
+
 	Connection con;
 	PreparedStatement pst;
 	ResultSet rs;
 
-	public void Connect() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:sample.db");
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				rs.close();
-				pst.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-
-	}
-	
 	public void sales_table() {
 
 		try {
@@ -103,7 +80,7 @@ public class Report extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pst.close();
@@ -125,33 +102,32 @@ public class Report extends JFrame {
 		setContentPane(contentPane);
 		setLocationRelativeTo(this);
 		contentPane.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(14, 46, 130));
 		panel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBounds(0, 0, 609, 438);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JScrollPane sp = new JScrollPane();
 		sp.setBounds(6, 50, 597, 347);
 		panel.add(sp);
-		
+
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID", "Date", "Totale", "Payé", "Balance"
-			}
-		));
+				new Object[][] {
+				},
+				new String[] {
+						"ID", "Date", "Totale", "Payï¿½", "Balance"
+				}));
 		table.setBounds(10, 11, 569, 320);
 		sp.setViewportView(table);
-		
+
 		JButton btnNewButton = new JButton("Close");
 		btnNewButton.setBounds(252, 409, 89, 23);
 		panel.add(btnNewButton);
-		
+
 		JLabel lblNewLabel = new JLabel("Ventes");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(245, 6, 114, 32);
@@ -162,8 +138,8 @@ public class Report extends JFrame {
 				setVisible(false);
 			}
 		});
-		
-		Connect();
+
+		Connexion.Connect(con, pst, rs);
 		sales_table();
 	}
 
